@@ -1,0 +1,7 @@
+baseURL = 'https://sisinfo-f40386.e.usp.br/'
+locale = 'pt-br'
+defaultContentLanguage = 'pt-br'
+title = 'Golurk | Pokédex'
+
+[params]
+description = 'Uma ficha completa sobre Golurk, o Pokémon Autômato.'

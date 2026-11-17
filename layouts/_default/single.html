@@ -1,0 +1,7 @@
+{{ define "main" }}
+    <article class="page-content">
+        <p class="eyebrow">{{ .Section | humanize }}</p>
+        <h1>{{ .Title }}</h1>
+        {{ .Content }}
+    </article>
+{{ end }}

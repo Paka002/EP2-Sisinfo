@@ -1,0 +1,25 @@
+{{ define "main" }}
+    <section class="hero" aria-labelledby="intro-title">
+        <p class="eyebrow">Pokémon nº 623 · 5ª geração</p>
+        <h1 id="intro-title">Golurk, o guardião feito para proteger.</h1>
+        <div class="hero-copy">{{ .Content }}</div>
+        <a class="button" href="{{ relURL "projects" }}">Explorar dados</a>
+    </section>
+
+    <section class="home-section" aria-labelledby="highlights-title">
+        <div class="section-heading">
+            <p class="eyebrow">Ficha de espécie</p>
+            <h2 id="highlights-title">Conheça o Golurk</h2>
+        </div>
+        <div class="project-grid">
+            {{ range first 3 (where .Site.RegularPages "Section" "projects") }}
+                <article class="project-card">
+                    <p class="card-kicker">{{ .Params.category }}</p>
+                    <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                    <p>{{ .Summary }}</p>
+                </article>
+            {{ end }}
+        </div>
+    </section>
+{{ end }}
+
