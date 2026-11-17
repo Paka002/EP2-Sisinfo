@@ -1,2 +1,5 @@
 public/
 .hugo_build.lock
+db.sqlite3
+__pycache__/
+*.py[cod]

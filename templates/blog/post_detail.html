@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} · Sisinfo{% endblock %}
+{% block content %}
+<article class="page-content">
+    <p class="eyebrow">{{ post.published_at|date:"d/m/Y H:i" }}</p>
+    <h1>{{ post.title }}</h1>
+    <div class="post-content">{{ post.content|safe }}</div>
+    <p class="form-actions">
+        <a class="button" href="{% url 'blog:post_update' post.pk %}">Editar</a>
+        <a href="{% url 'blog:post_delete' post.pk %}">Remover</a>
+    </p>
+</article>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Remover {{ post.title }} · Sisinfo{% endblock %}
+{% block content %}
+<section class="page-content">
+    <p class="eyebrow">Confirmação</p>
+    <h1>Remover post?</h1>
+    <p>Esta ação removerá “{{ post.title }}” permanentemente.</p>
+    <form method="post">
+        {% csrf_token %}
+        <button class="button" type="submit">Confirmar remoção</button>
+        <a href="{% url 'blog:post_detail' post.pk %}">Cancelar</a>
+    </form>
+</section>
+{% endblock %}

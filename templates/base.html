@@ -1,0 +1,28 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Sisinfo{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header>
+    <div class="site-header">
+        <a class="brand" href="{% url 'blog:post_list' %}">Sisinfo</a>
+        <nav aria-label="Navegação principal">
+            <ul>
+                <li><a href="{% url 'blog:post_list' %}">Início</a></li>
+                <li><a href="{% url 'blog:post_create' %}">Novo post</a></li>
+                <li><a href="{% url 'admin:index' %}">Administração</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<main id="conteudo">
+    {% block content %}{% endblock %}
+</main>
+<footer><p>Sisinfo · Aplicação CRUD com Django</p></footer>
+</body>
+</html>
