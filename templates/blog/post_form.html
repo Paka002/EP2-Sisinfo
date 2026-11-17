@@ -6,12 +6,12 @@
     <h1>{{ action }} post</h1>
     <form method="post" class="form-card">
         {% csrf_token %}
-        <label for="title">Título</label>
-        <input id="title" name="title" value="{{ post.title|default:'' }}" required maxlength="200">
-        <label for="content">Conteúdo HTML</label>
-        <textarea id="content" name="content" rows="12" required>{{ post.content|default:'' }}</textarea>
-        <label for="published_at">Data de publicação</label>
-        <input id="published_at" name="published_at" type="datetime-local" value="{{ post.published_at|date:'Y-m-d\TH:i' }}" required>
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {{ field.errors }}
+        {% endfor %}
         <button class="button" type="submit">{{ action }} post</button>
     </form>
 </section>

@@ -2,6 +2,7 @@ from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
+from .forms import PostForm
 from .models import Post
 
 
@@ -18,25 +19,20 @@ def post_detail(request, pk):
 
 
 def post_create(request):
-    if request.method == "POST":
-        post = Post.objects.create(
-            title=request.POST.get("title", ""),
-            content=request.POST.get("content", ""),
-            published_at=request.POST.get("published_at"),
-        )
+    form = PostForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        post = form.save()
         return HttpResponseRedirect(reverse("blog:post_detail", args=[post.pk]))
-    return render(request, "blog/post_form.html", {"action": "Criar"})
+    return render(request, "blog/post_form.html", {"action": "Criar", "form": form})
 
 
 def post_update(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    if request.method == "POST":
-        post.title = request.POST.get("title", "")
-        post.content = request.POST.get("content", "")
-        post.published_at = request.POST.get("published_at")
-        post.save()
+    form = PostForm(request.POST or None, instance=post)
+    if request.method == "POST" and form.is_valid():
+        form.save()
         return HttpResponseRedirect(reverse("blog:post_detail", args=[post.pk]))
-    return render(request, "blog/post_form.html", {"post": post, "action": "Editar"})
+    return render(request, "blog/post_form.html", {"post": post, "action": "Editar", "form": form})
 
 
 def post_delete(request, pk):
