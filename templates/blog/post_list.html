@@ -14,6 +14,7 @@
         <article class="project-card">
             <p class="card-kicker">{{ post.published_at|date:"d/m/Y H:i" }}</p>
             <h3><a href="{% url 'blog:post_detail' post.pk %}">{{ post.title }}</a></h3>
+            <p>{% for category in post.categories.all %}<a href="{% url 'blog:category_detail' category.pk %}">{{ category.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
             <p>{{ post.content|striptags|truncatewords:24 }}</p>
             <a class="text-link" href="{% url 'blog:post_detail' post.pk %}">Ler post →</a>
         </article>

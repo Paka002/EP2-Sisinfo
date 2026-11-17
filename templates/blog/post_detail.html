@@ -5,9 +5,26 @@
     <p class="eyebrow">{{ post.published_at|date:"d/m/Y H:i" }}</p>
     <h1>{{ post.title }}</h1>
     <div class="post-content">{{ post.content|safe }}</div>
+    <p class="card-kicker">Categorias:
+        {% for category in post.categories.all %}
+            <a href="{% url 'blog:category_detail' category.pk %}">{{ category.name }}</a>{% if not forloop.last %}, {% endif %}
+        {% empty %}sem categoria{% endfor %}
+    </p>
     <p class="form-actions">
         <a class="button" href="{% url 'blog:post_update' post.pk %}">Editar</a>
         <a href="{% url 'blog:post_delete' post.pk %}">Remover</a>
     </p>
 </article>
+<section class="page-content comments">
+    <h2>Comentários</h2>
+    <p><a class="button" href="{% url 'blog:comment_create' post.pk %}">Adicionar comentário</a></p>
+    {% for comment in post.comments.all %}
+        <article class="comment">
+            <p class="card-kicker">{{ comment.author }} · {{ comment.created_at|date:"d/m/Y H:i" }}</p>
+            <p>{{ comment.text }}</p>
+        </article>
+    {% empty %}
+        <p>Este post ainda não tem comentários.</p>
+    {% endfor %}
+</section>
 {% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{{ category.name }} · Sisinfo{% endblock %}
+{% block content %}
+<section class="page-content">
+    <p class="eyebrow">Categoria</p>
+    <h1>{{ category.name }}</h1>
+    <div class="project-grid">
+        {% for post in category.posts.all %}
+            <article class="project-card">
+                <p class="card-kicker">{{ post.published_at|date:"d/m/Y H:i" }}</p>
+                <h3><a href="{% url 'blog:post_detail' post.pk %}">{{ post.title }}</a></h3>
+                <p>{{ post.content|striptags|truncatewords:24 }}</p>
+            </article>
+        {% empty %}<p>Nenhum post nesta categoria.</p>{% endfor %}
+    </div>
+</section>
+{% endblock %}

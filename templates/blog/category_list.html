@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Categorias · Sisinfo{% endblock %}
+{% block content %}
+<section class="page-content">
+    <p class="eyebrow">Organização</p>
+    <h1>Categorias</h1>
+    <ul>
+        {% for category in categories %}
+            <li><a href="{% url 'blog:category_detail' category.pk %}">{{ category.name }}</a></li>
+        {% empty %}<li>Nenhuma categoria cadastrada.</li>{% endfor %}
+    </ul>
+</section>
+{% endblock %}

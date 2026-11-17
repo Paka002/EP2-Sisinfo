@@ -10,4 +10,7 @@ urlpatterns = [
     path("post/novo/", views.PostCreateView.as_view(), name="post_create"),
     path("post/<int:pk>/editar/", views.PostUpdateView.as_view(), name="post_update"),
     path("post/<int:pk>/remover/", views.PostDeleteView.as_view(), name="post_delete"),
+    path("post/<int:pk>/comentar/", views.CommentCreateView.as_view(), name="comment_create"),
+    path("categorias/", views.CategoryListView.as_view(), name="category_list"),
+    path("categoria/<int:pk>/", views.CategoryDetailView.as_view(), name="category_detail"),
 ]
