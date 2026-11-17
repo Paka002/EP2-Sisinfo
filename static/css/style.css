@@ -69,6 +69,13 @@ main { min-height: calc(100vh - 10rem); }
 .page-content > p:not(.eyebrow) { font-size: 1.2rem; }
 .page-content h2 { margin-top: 2.5rem; }
 footer { padding: 2rem 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
+.form-card { display: grid; gap: .55rem; max-width: 700px; padding: 1.5rem; background: var(--surface); border-top: 3px solid var(--accent); }
+.form-card label { font-family: Arial, sans-serif; font-size: .85rem; font-weight: bold; }
+.form-card input, .form-card textarea { width: 100%; padding: .7rem; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font: inherit; }
+.form-card ul.errorlist { margin: 0; color: var(--accent-dark); font-family: Arial, sans-serif; font-size: .85rem; }
+.form-actions { display: flex; align-items: center; gap: 1rem; }
+.post-content { max-width: 760px; }
+.comment { padding: 1rem 1.2rem; margin: 1rem 0; background: var(--surface); border-left: 3px solid var(--accent); }
 
 @media (max-width: 700px) {
     .site-header { align-items: flex-start; flex-direction: column; padding: 1.2rem 0; gap: .7rem; }
