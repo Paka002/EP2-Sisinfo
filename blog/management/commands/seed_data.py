@@ -15,29 +15,49 @@ class Command(BaseCommand):
         user.set_password("aluno123")
         user.save()
 
+        category_names = {
+            1: "Força",
+            2: "Aparência",
+            3: "Habilidades",
+        }
         categories = {
-            name: Category.objects.get_or_create(name=name)[0]
-            for name in ("Tecnologia", "Pesquisa", "Cultura")
+            name: Category.objects.update_or_create(
+                pk=category_id, defaults={"name": name}
+            )[0]
+            for category_id, name in category_names.items()
         }
         posts = [
-            ("Introdução ao projeto", "<p>Um post sem comentários sobre o projeto.</p>", ()),
-            ("Django e dados", "<p>Como organizar dados em uma aplicação Django.</p>", ("Tecnologia", "Pesquisa")),
-            ("Cultura digital", "<p>Reflexões sobre cultura e informação.</p>", ("Cultura", "Pesquisa")),
+            (
+                "Golurk: força e imponência",
+                "<p>Golurk é um Pokémon forte e resistente, capaz de proteger seus aliados com muita coragem.</p>",
+                (),
+            ),
+            (
+                "Golurk é forte e habilidoso",
+                "<p>Com seus golpes poderosos e energia misteriosa, Golurk é um dos Pokémon mais impressionantes.</p>",
+                ("Força", "Habilidades"),
+            ),
+            (
+                "Golurk é legal e bonito",
+                "<p>Além de ser forte, Golurk tem um visual marcante e uma presença muito legal.</p>",
+                ("Aparência", "Habilidades"),
+            ),
         ]
         created_posts = []
-        for index, (title, content, category_names) in enumerate(posts):
+        for index, (title, content, post_category_names) in enumerate(posts, start=1):
             post, _ = Post.objects.update_or_create(
-                title=title,
+                pk=index,
                 defaults={
+                    "title": title,
                     "content": content,
-                    "published_at": timezone.make_aware(datetime(2026, 1, 1 + index, 10, 0)),
+                    "published_at": timezone.make_aware(datetime(2026, 1, index, 10, 0)),
                 },
             )
-            post.categories.set([categories[name] for name in category_names])
+            post.categories.set([categories[name] for name in post_category_names])
             created_posts.append(post)
 
         Comment.objects.filter(post__in=created_posts).delete()
         for post in created_posts[1:]:
-            Comment.objects.create(post=post, author=user, text=f"Excelente conteúdo sobre {post.title}.")
-            Comment.objects.create(post=post, author=user, text="A informação foi muito útil.")
+            Comment.objects.create(post=post, author=user, text=f"{post.title} é muito legal!")
+            Comment.objects.create(post=post, author=user, text="Golurk é forte e bonito.")
         self.stdout.write(self.style.SUCCESS("Dados iniciais criados com sucesso."))

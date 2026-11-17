@@ -4,13 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}Sisinfo{% endblock %}</title>
+    <title>{% block title %}Golurk{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 <header>
     <div class="site-header">
-        <a class="brand" href="{% url 'blog:post_list' %}">Sisinfo</a>
+        <a class="brand" href="{% url 'blog:post_list' %}">Golurk</a>
         <nav aria-label="Navegação principal">
             <ul>
                 <li><a href="{% url 'blog:post_list' %}">Início</a></li>
@@ -24,6 +24,6 @@
 <main id="conteudo">
     {% block content %}{% endblock %}
 </main>
-<footer><p>Sisinfo · Aplicação CRUD com Django</p></footer>
+<footer><p>Golurk · Pokémon forte, legal e bonito</p></footer>
 </body>
 </html>
